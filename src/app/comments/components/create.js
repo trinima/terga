@@ -35,7 +35,7 @@ function Create() {
     }
 
     return <form id="comment-create-form" className="flex flex-col gap-4 justify-center w-full p-4 pt-0" onSubmit={onSubmit}>
-        <div class="flex flex-col w-full">
+        <div className="flex flex-col w-full">
             <label className="py-4 pt-0">Author:</label>
             <input id="comment-create-author"
                 className="border-1 border-gray-800 bg-gray-200 text-gray-800 p-4"
@@ -44,7 +44,7 @@ function Create() {
                 value={author}
             />
         </div>
-        <div class="flex flex-col w-full">
+        <div className="flex flex-col w-full">
             <label className="py-4">Content:</label>
             <textarea id="comment-create-input"
                 className="border-1 border-gray-800 bg-gray-200 text-gray-800 p-4"

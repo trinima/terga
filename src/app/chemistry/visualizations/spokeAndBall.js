@@ -3,11 +3,30 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-function toCoordinates(angleInDegrees, radius) {
-    const angleInRadians = angleInDegrees * (Math.PI / 180);
-    const x = radius * Math.cos(angleInRadians);
-    const y = radius * Math.sin(angleInRadians);
-    return { x, y };
+function toCoordinates(rotation, radius) {
+    const rx = ((rotation && rotation.x) || 0) * Math.PI / 180;
+    const ry = ((rotation && rotation.y) || 0) * Math.PI / 180;
+    const rz = ((rotation && rotation.z) || 0) * Math.PI / 180;
+
+    // start at (radius, 0, 0)
+    let x = radius, y = 0, z = 0;
+
+    // rotate around Z
+    const x1 = x * Math.cos(rz) - y * Math.sin(rz);
+    const y1 = x * Math.sin(rz) + y * Math.cos(rz);
+    const z1 = z;
+
+    // rotate around Y
+    const x2 = x1 * Math.cos(ry) + z1 * Math.sin(ry);
+    const y2 = y1;
+    const z2 = -x1 * Math.sin(ry) + z1 * Math.cos(ry);
+
+    // rotate around X
+    const x3 = x2;
+    const y3 = y2 * Math.cos(rx) - z2 * Math.sin(rx);
+    const z3 = y2 * Math.sin(rx) + z2 * Math.cos(rx);
+
+    return { x: x3, y: y3, z: z3 };
 }
 
 class Drawable {
