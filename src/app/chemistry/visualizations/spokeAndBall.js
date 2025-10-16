@@ -26,6 +26,7 @@ function toCoordinates(rotation, radius) {
     const y3 = y2 * Math.cos(rx) - z2 * Math.sin(rx);
     const z3 = y2 * Math.sin(rx) + z2 * Math.cos(rx);
 
+    console.debug('halibut', { rotation, radius, x1, x2, x3, y1, y2, y3, z1, z2, z3 });
     return { x: x3, y: y3, z: z3 };
 }
 
@@ -167,6 +168,10 @@ class MoleculeRenderer extends Drawable {
     }
 
     update() {
+        this.#mesh.rotation.x += .01;
+        this.#mesh.rotation.y += .01;
+        this.#mesh.rotation.z += .01;
+
         this.#atoms.forEach(atom => {
             atom.update();
         });

@@ -18,9 +18,9 @@ function MoleculeVisualizations() {
             const hydrogenB = new Atom(1, 'Hydrogen');
             const hydrogenC = new Atom(1, 'Hydrogen');
 
-            const nToHaBond = new Bond({ anchor: nitrogen, bondAngle: { x: 300, z: 0 }, bondType: 'single', leaf: hydrogenA });
-            const nToHbBond = new Bond({ anchor: nitrogen, bondAngle: { x: 300, z: 107 }, bondType: 'single', leaf: hydrogenB });
-            const nToHcBond = new Bond({ anchor: nitrogen, bondAngle: { x: 300, z: 233.5 }, bondType: 'single', leaf: hydrogenC });
+            const nToHaBond = new Bond({ anchor: nitrogen, bondAngle: { z: 45, y: 0 }, bondType: 'single', leaf: hydrogenA });
+            const nToHbBond = new Bond({ anchor: nitrogen, bondAngle: { z: 45, y: 107 }, bondType: 'single', leaf: hydrogenB });
+            const nToHcBond = new Bond({ anchor: nitrogen, bondAngle: { z: 45, y: 233.5 }, bondType: 'single', leaf: hydrogenC });
 
             molecule.addBond(nToHaBond);
             molecule.addBond(nToHbBond);
