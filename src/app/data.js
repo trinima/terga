@@ -18,39 +18,38 @@ class DataContext {
         return client.db('terga');
     }
 
-    getTherapyNotesCollection(db) {
-        return db.collection('therapy-notes');
-    }
-
-    async safeTherapyNotesAction(action) {
+    async safeCollectionAction(action, collectionName) {
         const client = await this.getConnectedClient();
 
         try {
             const db = this.getTergaDb(client);
-            const collection = this.getTherapyNotesCollection(db);
+            const collection = db.collection(collectionName);
             await action(collection);
         } finally {
             await client.close();
         }
     }
+    async safeCommentsAction(action) {
+        return this.safeCollectionAction(action, 'comments');
+    }
 
-    async createNote(note) {
-        console.log("Creating note:", { note });
-        await this.safeTherapyNotesAction(async (collection) => {
-            await collection.insertOne(note);
+    async createComment(comment) {
+        console.log("Creating comment:", { comment });
+        await this.safeCommentsAction(async (collection) => {
+            await collection.insertOne(comment);
         });
     }
 
-    async getAllNotes() {
-        let notes = [];
-        await this.safeTherapyNotesAction(async (collection) => {
-            notes = await collection
+    async getAllComments() {
+        let comments = [];
+        await this.safeCommentsAction(async (collection) => {
+            comments = await collection
                 .find({})
-                .sort({ date: -1 })
+                .sort({ createdTimestamp: -1 })
                 .toArray();
         });
-        console.log("Fetched notes:", { notes });
-        return notes;
+        console.log("Fetched comments:", { comments });
+        return comments;
     }
 }
 

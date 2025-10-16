@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { Widget as Chemistry } from "./chemistry/widget";
-import { Widget as TherapyNotes } from "./therapyNotes/widget";
+import { Widget as Comments } from "./comments/widget";
 
 export default function Home() {
   return (
@@ -16,11 +16,14 @@ export default function Home() {
           height={30}
           priority
         />
-        <h1 className="text-4xl font-bold">Terga</h1>
+        <div className="my-auto flex flex-col items-start">
+          <h1 className="text-4xl font-bold">Terga</h1>
+          <p className="my-auto">Random things by a programmer.</p>
+        </div>
       </header>
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start m-auto w-full">
         <Chemistry />
-        <TherapyNotes />
+        <Comments />
       </main>
       <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
 
