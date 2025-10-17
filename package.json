@@ -12,7 +12,8 @@
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",
-    "three": "^0.180.0"
+    "three": "^0.180.0",
+    "three-spritetext": "^1.10.0"
   },
   "devDependencies": {
     "@playwright/test": "^1.56.0",

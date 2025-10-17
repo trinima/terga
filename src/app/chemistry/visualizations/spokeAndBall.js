@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import SpriteText from 'three-spritetext';
 
 function toCoordinates(rotation, radius) {
     const rx = ((rotation && rotation.x) || 0) * Math.PI / 180;
@@ -26,7 +27,6 @@ function toCoordinates(rotation, radius) {
     const y3 = y2 * Math.cos(rx) - z2 * Math.sin(rx);
     const z3 = y2 * Math.sin(rx) + z2 * Math.cos(rx);
 
-    console.debug('halibut', { rotation, radius, x1, x2, x3, y1, y2, y3, z1, z2, z3 });
     return { x: x3, y: y3, z: z3 };
 }
 
@@ -72,10 +72,13 @@ class BondRenderer extends Drawable {
 }
 
 class AtomRenderer extends Drawable {
+    #atom;
     #sphereOfInfluence;
 
-    constructor() {
+    constructor({ atom }) {
         super();
+
+        this.#atom = atom;
 
         this.#constructSphereOfInfluence();
     }
@@ -84,6 +87,10 @@ class AtomRenderer extends Drawable {
         const geometry = new THREE.SphereGeometry(0.2, 32, 32);
         const material = new THREE.MeshBasicMaterial({ color: 0x0000ff });
         this.#sphereOfInfluence = new THREE.Mesh(geometry, material);
+        // Create a new SpriteText instance
+        const myText = new SpriteText(this.#atom.getSymbol(), .3, 'white');
+        myText.position.set(.25, .25, 0);
+        this.#sphereOfInfluence.add(myText);
     }
 
     addToMesh(mesh) {
@@ -105,8 +112,11 @@ class AtomRenderer extends Drawable {
     }
 
     update() {
-        this.#sphereOfInfluence.rotation.x += 0.01;
-        this.#sphereOfInfluence.rotation.y += 0.01;
+        // this.#sphereOfInfluence.rotation.x += 0.01;
+        // this.#sphereOfInfluence.rotation.y += 0.01;
+        this.#sphereOfInfluence.rotation.x -= .01;
+        this.#sphereOfInfluence.rotation.y -= .01;
+        this.#sphereOfInfluence.rotation.z -= .01;
     }
 }
 
@@ -161,6 +171,8 @@ class MoleculeRenderer extends Drawable {
 
         const bondRenderer = new BondRenderer({ startAtom: anchorRenderer, endAtom: leafRenderer });
         bondRenderer.addToMesh(this.#mesh);
+
+
     }
 
     addToScene(scene) {

@@ -48,7 +48,6 @@ class DataContext {
                 .sort({ createdTimestamp: -1 })
                 .toArray();
         });
-        console.log("Fetched comments:", { comments });
         return comments;
     }
 }

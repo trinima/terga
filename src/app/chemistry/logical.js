@@ -1,10 +1,12 @@
 class Atom {
     #atomicNumber;
     #name;
+    #symbol;
 
-    constructor(atomicNumber, name) {
+    constructor(atomicNumber, name, symbol) {
         this.#atomicNumber = atomicNumber;
         this.#name = name;
+        this.#symbol = symbol;
     }
 
     getAtomicNumber() {
@@ -13,6 +15,10 @@ class Atom {
 
     getName() {
         return this.#name;
+    }
+
+    getSymbol() {
+        return this.#symbol;
     }
 }
 

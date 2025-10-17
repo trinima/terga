@@ -53,7 +53,7 @@ function Create() {
             />
         </div>
         <button id="comment-create-submit"
-            className="bg-blue-500 text-white px-4 py-4 rounded capitalize w-128 mx-auto my-8"
+            className="bg-blue-500 text-white px-4 py-4 rounded capitalize w-full md:w-128  mx-auto my-8"
             type="submit">
             Post
         </button>

@@ -7,7 +7,7 @@ import { LoadingOverlay } from "@/app/client/components/loadingOverlay";
 function ListAll() {
     const { comments, isLoading } = useContext(CommentContext);
 
-    return (<div className="relative min-h-32">
+    return (<div className="relative min-h-64">
         {comments ?
             <ul id="comment-list">
                 {comments.map((comment) => (
