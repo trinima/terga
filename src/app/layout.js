@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Image from "next/image";
+import { NavigationBar } from './client/components/navigationBar';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,19 +25,22 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="font-sans grid items-center justify-items-center p-8 pb-20 gap-8 sm:p-20">
-          <header className="flex flex-row row-start-1 justify-start w-full gap-4 text-center">
-            <Image
-              className="dark:invert"
-              src="/logo.svg"
-              alt="Terga logo"
-              width={150}
-              height={30}
-              priority
-            />
-            <div className="my-auto flex flex-col items-start">
-              <h1 className="text-4xl font-bold">Terga</h1>
-              <p className="my-auto px-0 text-left">Random things by a programmer.</p>
+          <header className="flex flex-col row-start-1 w-full gap-4 text-center">
+            <div className="flex flex-row justify-center">
+              <Image
+                className="dark:invert"
+                src="/logo.svg"
+                alt="Terga logo"
+                width={150}
+                height={30}
+                priority
+              />
+              <div className="my-auto flex flex-col items-start">
+                <h1 className="text-4xl font-bold">Terga</h1>
+                <p className="my-auto px-0 text-left">Random musings</p>
+              </div>
             </div>
+            <NavigationBar />
           </header>
           <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start m-auto w-full">
             {children}
@@ -45,7 +49,6 @@ export default function RootLayout({ children }) {
 
           </footer>
         </div>
-
       </body>
     </html>
   );
